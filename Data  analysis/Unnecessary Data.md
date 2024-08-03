@@ -39,4 +39,35 @@ ns_book = ns_df.drop(['부가기호', 'Unnamed: 13'], axis=1)
 #여러 개의 열을 삭제하려면 리스트 형식으로 사용 
 ns_book.head()
 ```
-**※ axis 매개변수의 기본값인 0은 행, 1은 열을 나타냄**
+**※ axis 매개변수의 기본값인 0은 행(가로), 1은 열(세로)을 나타냄**
+
+### dropna() 메서드
+- pandas는 비어있는 값은 NaN(Not a Number: 정의되지 않은 값 혹은 표현할 수 없는 값)으로 표시한다.
+- **NaN이 하나라도 포함된 행이나 열을 삭제**한다.
+- 모든 값이 NaN인 열을 삭제하려면 dropna()메서드에 **how**매개변수를 'all'로 지정하면 된다.
+```py
+ns_book = ns_df.dropna(axis=1)
+ns_book.head()
+```
+![image](https://github.com/user-attachments/assets/2bd4c219-db80-47e9-a706-41cf4def8c45)
+
+
+## 행 삭제하기
+- 행을 삭제할 때는 drop() 메서드 혹은 []연산자, 슬라이싱 등을 사용한다.
+  
+### drop() 메서드
+- axis를 0으로 지정하면 행을 삭제할 수 있다.(그러나 기본값이 0이기 때문에 생략 가능)
+```py
+ns_book2 = ns_book.drop([0,1])
+ns_book2 = ns_book2.drop(['Unnamed: 0'], axis=1)
+ns_book2.head()
+```
+
+### []연산자와 슬라이싱
+- 슬라이싱을 이용해서 범위를 지정해줄 수 있다.
+```py
+ns_book2 = ns_book[2:]
+ns_book2.head()
+```
+※ drop() 메서드나 슬라이싱 모두 같은 결과 출력. 2번째 인덱스부터 출력됨
+![image](https://github.com/user-attachments/assets/7a086f6a-2e0a-45e4-8d3f-e5eeb7399ceb)
