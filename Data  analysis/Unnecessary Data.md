@@ -71,3 +71,19 @@ ns_book2.head()
 ```
 ※ drop() 메서드나 슬라이싱 모두 같은 결과 출력. 2번째 인덱스부터 출력됨
 ![image](https://github.com/user-attachments/assets/7a086f6a-2e0a-45e4-8d3f-e5eeb7399ceb)
+
+### []연산자와 불리언 배열
+- 행을 선택할 때 가장 즐겨 사용하는 표현이다.
+- 원하는 행은 True로, 제외할 행은 False로 표시한 불리언 배열을 만들어 사용한다.
+```py
+selected_rows = ns_df['출판사'] == '한빛미디어' #출판사가 '한빛미디어'인 행만 출력
+ns_book2 = ns_book[selected_rows]
+ns_book2.head()
+```
+![image](https://github.com/user-attachments/assets/249e11d9-5f86-4287-9e52-09f3b0bc70e7)
+
+```py
+ns_book2 = ns_book[ns_book['대출건수'] > 1000] #대출건수가 1,000건이 넘는 행만 출력
+ns_book2.head()
+```
+
