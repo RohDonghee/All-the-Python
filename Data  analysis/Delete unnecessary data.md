@@ -118,7 +118,3 @@ loan_count.head()
 ![image](https://github.com/user-attachments/assets/65cd401a-5ca0-4ca2-bacc-b3d96ce1ee57)
 
 
-## 원본 데이터 업데이트하기 
-- 대출건수를 원본 데이터프레임에 업데이트하려고 할 때, 원본 데이터프레임에는 중복된 데이터가 있는 상황이다.
-- 더해진 대출건수를 업데이트하기 전에 일련의 과정이 필요하다.
-- 
