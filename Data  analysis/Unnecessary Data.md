@@ -90,7 +90,7 @@ ns_book2.head()
 ## 중복된 행 찾기
 ### duplicated() 메서드
 - **중복여부를 불리언 배열**로 반환한다.
-- 처음 행을 True, 나머지 행을 False로 표시한다.
+- 처음 행을 Fasle, 나머지(중복된) 행을 True로 표시한다.
 - 데이터프레임에 있는 모든 열을 기준으로 중복된 행을 표시한다.
 - 일부 열을 기준으로 중복된 행을 찾으려면 ```subset 매개변수```를 활용한다.
 - subset 사용할 때 주의 : **두 개 이상의 값을 불러 올때는 DataFrame 형태**로 불러와야 합니다.
@@ -108,7 +108,7 @@ sum(ns_book.duplicated(subset=['도서명','저자','ISBN']) #도서명, 저자,
   - **Apply 단계**: 나뉘어진 독립된 그룹별 함수를 적용하는 단계 입니다. 예시에서는 합계(sum)함수를 적용하여 각 그룹별 총계가 합산된 결과를 확인할 수 있습니다.
   - **Combine 단계**: 최종 단계이며, 각각의 독립된 그룹별로 함수가 적용된 결과를 종합하여 다시 하나의 테이블로 합칩니다.
 ```py
-count_df = ns_df[['도서명', '저자', 'ISBN', '권', '대출건수']] #그룹으로 묶을 기준 열과 대출건수 열만 선택해서 사용
+count_df = ns_book[['도서명', '저자', 'ISBN', '권', '대출건수']] #그룹으로 묶을 기준 열과 대출건수 열만 선택해서 사용
 group_df = count_df.groupby(by = ['도서명','저자','ISBN','권'], dropna=False) #이 4개의 열을 묶어줌 (groupby는 NaN이 있는 행을 삭제하기 대문에 dropna = False 설정)
 loan_count = group_df.sum()
 loan_count = count_df.groupby(by=['도서명','저자','ISBN','권'], dropna = False).sum() #
