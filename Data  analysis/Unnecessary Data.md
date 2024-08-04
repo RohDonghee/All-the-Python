@@ -87,3 +87,38 @@ ns_book2 = ns_book[ns_book['대출건수'] > 1000] #대출건수가 1,000건이 
 ns_book2.head()
 ```
 
+## 중복된 행 찾기
+### duplicated() 메서드
+- **중복여부를 불리언 배열**로 반환한다.
+- 처음 행을 True, 나머지 행을 False로 표시한다.
+- 데이터프레임에 있는 모든 열을 기준으로 중복된 행을 표시한다.
+- 일부 열을 기준으로 중복된 행을 찾으려면 ```subset 매개변수```를 활용한다.
+- subset 사용할 때 주의 : **두 개 이상의 값을 불러 올때는 DataFrame 형태**로 불러와야 합니다.
+```py
+sum(ns_book.duplicated(subset=['도서명','저자','ISBN']) #도서명, 저자, ISBN으로 한정하여 중복 검사 
+```
+
+## 그룹별로 모으기 
+### groupby() 메서드
+- 데이터를 그룹별로 분할하여 독립된 그룹에 대하여 별도로 데이터를 처리(혹은 적용)하거나 그룹별 통계량을 확인한다.
+- ```by 매개변수```로 행을 합칠 때 기준이 되는 열을 지정한다.
+![image](https://github.com/user-attachments/assets/8e8e8079-93b7-40c7-a587-8ea3177a60b9) <br>
+출처 : www.w3resource.com <br>
+  - **Split 단계**: 위에 이미지에서 Split 단계에서 .groupby()에서 정의한 컬럼 조건에 따라 독립된 그룹으로 나누어 줍니다. 예시에서는 ID 값을 기준으로 그룹을 나누었는데, 3개의 sub-group으로 분할된 모습입니다.
+  - **Apply 단계**: 나뉘어진 독립된 그룹별 함수를 적용하는 단계 입니다. 예시에서는 합계(sum)함수를 적용하여 각 그룹별 총계가 합산된 결과를 확인할 수 있습니다.
+  - **Combine 단계**: 최종 단계이며, 각각의 독립된 그룹별로 함수가 적용된 결과를 종합하여 다시 하나의 테이블로 합칩니다.
+```py
+count_df = ns_df[['도서명', '저자', 'ISBN', '권', '대출건수']] #그룹으로 묶을 기준 열과 대출건수 열만 선택해서 사용
+group_df = count_df.groupby(by = ['도서명','저자','ISBN','권'], dropna=False) #이 4개의 열을 묶어줌 (groupby는 NaN이 있는 행을 삭제하기 대문에 dropna = False 설정)
+loan_count = group_df.sum()
+loan_count = count_df.groupby(by=['도서명','저자','ISBN','권'], dropna = False).sum() #
+
+loan_count.head()
+```
+![image](https://github.com/user-attachments/assets/65cd401a-5ca0-4ca2-bacc-b3d96ce1ee57)
+
+
+## 원본 데이터 업데이트하기 
+- 대출건수를 원본 데이터프레임에 업데이트하려고 할 때, 원본 데이터프레임에는 중복된 데이터가 있는 상황이다.
+- 더해진 대출건수를 업데이트하기 전에 일련의 과정이 필요하다.
+- 
