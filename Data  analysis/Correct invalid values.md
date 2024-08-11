@@ -25,3 +25,16 @@ ns_book4.isna().sum()
 ### ■ None과 np.nan
 - 임의로 누락된 값을 만든 후에 NaN으로 표시한다.
 - 판다스 데이터프레임은 정수를 저장하는 열에 None이 입력되어 있으면 누락된 값으로 인식한다. 
+```py
+ns_book4.loc[0,'도서권수'] = None #0번째 행, '도서권수' 열의 값을 None으로 바꿈
+ns_book4.head(2)
+```
+□ **기존 데이터프레임** <br>
+![image](https://github.com/user-attachments/assets/16eeac4a-659c-4a05-888d-c7044555bc53)<br>
+□ **```ns_book4.loc[0,'도서권수']``` 적용된 데이터프레임**  <br>
+![image](https://github.com/user-attachments/assets/5024d806-b9a4-4589-93a9-346fde982bcf)<br>
+※ 도서권수는 기존에 int 값에서 float형으로 변한 이유는 판다스가 NaN을 특별한 실수 값으로 저장하기 때문이다. 이를 바꿔주기 위해서는 ```astype({'도서권수':'int32' , '대출건수':'int32'})```를 실행해줘야 한다.<br>
+
+## 누락된 값 바꾸기
+### ■ loc,fillna() 메서드
+
